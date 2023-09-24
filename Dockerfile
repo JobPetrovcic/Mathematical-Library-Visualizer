@@ -8,7 +8,7 @@ RUN apt-get update -q \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-ARG guest=demo
+ARG guest=VL
 ARG guest_uid=1000
 ARG guest_gid=${guest_uid}
 
@@ -21,9 +21,8 @@ RUN groupadd -g ${guest_gid} ${guest} \
 WORKDIR /home/${guest}
 USER ${guest}
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY entrypoint.sh /home/VL/entrypoint.sh
+RUN sudo chmod +x /home/VL/entrypoint.sh
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
