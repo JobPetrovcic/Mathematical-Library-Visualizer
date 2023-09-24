@@ -1,9 +1,35 @@
 FROM haskell:9.4.5
 LABEL maintainer="klao@nilcons.com"
 
+#TEST-------------------------------------------------
+CMD bash
+
+RUN apt-get update -q \
+        && apt-get install -y -q --no-install-recommends procps less emacs-lucid sudo m4 opam \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+
+################################################################################
+## Create the user
+
+ARG guest=demo
+ARG guest_uid=1000
+ARG guest_gid=${guest_uid}
+
+RUN groupadd -g ${guest_gid} ${guest} \
+        && useradd --no-log-init -m -s /bin/bash -g ${guest} -G sudo -p '' -u ${guest_uid} ${guest} \
+        && mkdir -p -v /home/${guest}/.local/bin \
+        && chown -R ${guest}:${guest} /home/${guest} \
+        && sed -i -e '/%sudo/s/)/) NOPASSWD:/' /etc/sudoers
+
+WORKDIR /home/${guest}
+USER ${guest}
+
 COPY entrypoint.sh ./entrypoint.sh
 RUN sudo chmod +x entrypoint.sh
 ENTRYPOINT [ "./entrypoint.sh" ]
+
+#-----------------------------------------------------
 
 #CMD bash
 #
