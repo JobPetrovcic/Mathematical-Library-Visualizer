@@ -34,6 +34,7 @@ RUN sudo chmod +x /home/VL/entrypoint.sh
 
 ADD agda_install.sh ./
 RUN sudo chmod +x agda_install.sh
+#RUN ./agda_install.sh
 
 #run entry
 ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
