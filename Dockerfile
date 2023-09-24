@@ -3,6 +3,11 @@ FROM ubuntu:22.04
 
 CMD bash
 
+RUN apt-get update -q \
+        && apt-get install -y -q --no-install-recommends procps less emacs-lucid sudo m4 opam \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+
 ARG guest=demo
 ARG guest_uid=1000
 ARG guest_gid=${guest_uid}
