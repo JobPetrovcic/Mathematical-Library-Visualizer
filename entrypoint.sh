@@ -3,8 +3,8 @@
 echo "Your language is $1."
 cd /home/VL
 echo $(pwd)
-echo "HOME"
-echo $(ls /opt/ghc/${GHC}/bin )
+echo "GHC"
+echo $(ls /opt/ghc/9.4.5/bin -R)
 echo "24. 09 2023 3"
 
 if [ $1 = agda ];
