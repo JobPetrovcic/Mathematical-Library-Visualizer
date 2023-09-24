@@ -3,9 +3,9 @@
 echo "Your language is $1."
 echo $(pwd)
 echo "HOME"
-echo $(ls /home)
+echo $(ls /home -R)
 echo "GITHUB"
-echo $(/github)
+echo $(ls /github -R)
 echo "GITHUB/HOME"
 echo $(ls /github/home)
 
