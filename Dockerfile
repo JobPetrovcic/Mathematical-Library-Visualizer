@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM ubuntu:22.04
+FROM haskell:9.4.5
 
 CMD bash
 
@@ -21,23 +21,19 @@ RUN groupadd -g ${guest_gid} ${guest} \
 WORKDIR /home/${guest}
 USER ${guest}
 
-#install GHC and CABAL
+#GHC
 ARG GHC=9.4.5
 ARG CABAL_INSTALL=3.2
 
 ENV PATH /home/${guest}/.local/bin:/opt/cabal/${CABAL_INSTALL}/bin:/opt/ghc/${GHC}/bin:/usr/local/bin:/usr/bin:/bin
 ENV LC_ALL=C.UTF-8
 
-#install agda
-ADD agda_install.sh ./
-RUN sudo chmod +x agda_install.sh
-RUN ./agda_install.sh
-RUN agda --help
-COPY entrypoint.sh ./entrypoint.sh
-RUN sudo chmod +x entrypoint.sh
-
-#run entrypoint
-#NOTE: for some reason the user has to be hardcoded
+#copy files
 COPY entrypoint.sh /home/VL/entrypoint.sh
 RUN sudo chmod +x /home/VL/entrypoint.sh
+
+ADD agda_install.sh ./
+RUN sudo chmod +x agda_install.sh
+
+#run entry
 ENTRYPOINT [ "/home/VL/entrypoint.sh" ]

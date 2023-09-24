@@ -1,6 +1,4 @@
-#FROM haskell:9.4.5
-#LABEL maintainer="klao@nilcons.com"
-FROM ubuntu:22.04
+FROM haskell:9.4.5
 
 CMD bash
 
@@ -30,19 +28,19 @@ RUN echo $1
 ################################################################################
 ## Environment
 
-#ARG GHC=9.4.5
-#ARG CABAL_INSTALL=3.2
+ARG GHC=9.4.5
+ARG CABAL_INSTALL=3.2
 
-#ENV PATH /home/${guest}/.local/bin:/opt/cabal/${CABAL_INSTALL}/bin:/opt/ghc/${GHC}/bin:/usr/local/bin:/usr/bin:/bin
-#ENV LC_ALL=C.UTF-8
+ENV PATH /home/${guest}/.local/bin:/opt/cabal/${CABAL_INSTALL}/bin:/opt/ghc/${GHC}/bin:/usr/local/bin:/usr/bin:/bin
+ENV LC_ALL=C.UTF-8
 
 ################################################################################
 ## Agda
 
-#ADD agda_install.sh ./
-#RUN sudo chmod +x agda_install.sh
-#RUN ./agda_install.sh
-#RUN agda --help
+ADD agda_install.sh ./
+RUN sudo chmod +x agda_install.sh
+RUN ./agda_install.sh
+RUN agda --help
 #COPY entrypoint.sh ./entrypoint.sh
 #RUN sudo chmod +x entrypoint.sh
 #ENTRYPOINT [ "./entrypoint.sh" ]
