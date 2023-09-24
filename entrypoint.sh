@@ -1,4 +1,4 @@
 #!/bin/sh -l
 
 echo "Your language is $1."
-echo "24. 09 2023"
+echo "24. 09 2023 1"
