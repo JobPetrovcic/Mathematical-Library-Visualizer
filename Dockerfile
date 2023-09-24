@@ -1,5 +1,6 @@
-FROM haskell:9.4.5
-LABEL maintainer="klao@nilcons.com"
+#FROM haskell:9.4.5
+#LABEL maintainer="klao@nilcons.com"
+FROM ubuntu:22.04
 
 CMD bash
 

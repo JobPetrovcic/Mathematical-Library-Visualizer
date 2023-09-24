@@ -5,7 +5,7 @@ inputs:
   language:
     description: 'Language of your formal library. Supported options are Agda or Lean.'
     options:
-      - agda
+      - agdajeto
       - lean
       - autodetect
     initial: autodetect
