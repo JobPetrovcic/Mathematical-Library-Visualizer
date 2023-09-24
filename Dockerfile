@@ -41,4 +41,5 @@ RUN sudo chmod +x agda_install.sh
 COPY entrypoint.sh ./entrypoint.sh
 RUN sudo chmod +x entrypoint.sh
 RUN ls
+RUN echo "tuki"
 ENTRYPOINT [ "./entrypoint.sh" ]
