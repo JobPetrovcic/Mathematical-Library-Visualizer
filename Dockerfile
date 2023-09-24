@@ -40,4 +40,5 @@ ADD agda_install.sh ./
 RUN sudo chmod +x agda_install.sh
 COPY entrypoint.sh ./entrypoint.sh
 RUN sudo chmod +x entrypoint.sh
+RUN ls
 ENTRYPOINT [ "./entrypoint.sh" ]
