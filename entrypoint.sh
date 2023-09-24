@@ -1,6 +1,7 @@
 #!/bin/sh -l
 
 echo "Your language is $1."
+cd /home/VL
 echo $(pwd)
 echo "HOME"
 echo $(ls /home -R)
@@ -9,7 +10,7 @@ echo $(ls /github -R)
 echo "GITHUB/HOME"
 echo $(ls /github/home)
 
-echo "24. 09 2023 2"
+echo "24. 09 2023 3"
 
 if [ $1 = agda ];
 then
