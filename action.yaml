@@ -1,23 +1,16 @@
+# action.yml
 name: 'Formal Mathematics Library Visualizer'
-  description: 'Adds a visual representation of a formal mathematics library to your README.'
-  inputs:
-    language:
-      description: 'Language of your formal library. Supported options are Agda or Lean.'
-      options:
-        - agda
-        - lean
-        - autodetect
-      initial: autodetect
-  steps:
-    - name: get_agda_proof_assistant
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.ACCESSPROOFASSISTANT}}
-        repository: JobPetrovcic/agda-proof-assistent-assistent
-        ref: future-public-representation
-    
-    - name:
-      using: 'docker'
-      image: 'Dockerfile'
-      args:
-        - ${{ inputs.language }}
+description: 'Add a visual representation of a formal mathematics library to your README.'
+inputs:
+  language:
+    description: 'Language of your formal library. Supported options are Agda or Lean.'
+    options:
+      - agda
+      - lean
+      - autodetect
+    initial: autodetect
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.language }}
