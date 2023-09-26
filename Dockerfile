@@ -36,7 +36,6 @@ RUN sudo chmod +x agda_install.sh
 
 # setup python
 ADD requirements.txt ./
-RUN sudo apt
 RUN sudo apt-get install -y python3
 RUN apt-get -y install python3-pip
 RUN pip install requirements.txt -r
