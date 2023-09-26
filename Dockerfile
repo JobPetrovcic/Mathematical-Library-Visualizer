@@ -9,7 +9,7 @@ RUN apt-get update -q \
 
 RUN apt-get update && apt-get install -y -q ghc ghc-prof ghc-doc
 
-# setup python
+# install python and requirements
 ADD requirements.txt ./
 RUN apt-get update && apt-get install -y python3.10
 RUN apt-get install -y -q python3-pip
@@ -60,12 +60,23 @@ RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
 #RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install alex
 #RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install happy
 
-#add to path
+# add agda to path
 ENV PATH="~/.local/bin:$PATH"
+
+# INSTALL LEAN
+RUN wget -q https://raw.githubusercontent.com/leanprover-community/mathlib4/master/scripts/install_debian.sh && bash install_debian.sh 
+RUN rm -f install_debian.sh && source ~/.profile
+
+RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --no-modify-path --default-toolchain $LEAN_VERSION; \
+#    chmod -R a+w $ELAN_HOME; \
+#    elan --version; \
+#    lean --version; \
+#    leanc --version; \
+#    lake --version; \
 
 # copy entrypoint
 COPY entrypoint.sh /home/VL/entrypoint.sh
 RUN sudo chmod +x /home/VL/entrypoint.sh
 
 # run entrypoint
-ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
+#ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
