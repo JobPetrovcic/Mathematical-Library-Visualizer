@@ -37,7 +37,7 @@ RUN sudo chmod +x agda_install.sh
 # setup python
 ADD requirements.txt ./
 RUN sudo apt-get install -y python3
-RUN apt-get -y install python3-pip
+RUN sudo apt-get -y install python3-pip
 RUN pip install requirements.txt -r
 
 
@@ -46,4 +46,4 @@ COPY entrypoint.sh /home/VL/entrypoint.sh
 RUN sudo chmod +x /home/VL/entrypoint.sh
 
 # run entrypoint
-#ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
+ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
