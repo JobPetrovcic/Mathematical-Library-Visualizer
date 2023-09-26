@@ -1,4 +1,4 @@
-# Container image that runs your code
+# import haskell
 FROM haskell:9.4.5
 
 CMD bash
@@ -12,7 +12,7 @@ ARG guest=VL
 ARG guest_uid=1000
 ARG guest_gid=${guest_uid}
 
-#create a user
+# create a user
 RUN groupadd -g ${guest_gid} ${guest} \
         && useradd --no-log-init -m -s /bin/bash -g ${guest} -G sudo -p '' -u ${guest_uid} ${guest} \
         && mkdir -p -v /home/${guest}/.local/bin \
@@ -22,25 +22,25 @@ RUN groupadd -g ${guest_gid} ${guest} \
 WORKDIR /home/${guest}
 USER ${guest}
 
-#GHC
+# GHC
 ARG GHC=9.4.5
 ARG CABAL_INSTALL=3.2
 
 ENV PATH /home/${guest}/.local/bin:/opt/cabal/${CABAL_INSTALL}/bin:/opt/ghc/${GHC}/bin:/usr/local/bin:/usr/bin:/bin
 ENV LC_ALL=C.UTF-8
 
-#setup agda
+# setup agda
 ADD agda_install.sh ./
 RUN sudo chmod +x agda_install.sh
-#RUN ./agda_install.sh
+RUN ./agda_install.sh
 
-#setup 
+# setup 
 
 
 
-#copy entrypoint
+# copy entrypoint
 COPY entrypoint.sh /home/VL/entrypoint.sh
 RUN sudo chmod +x /home/VL/entrypoint.sh
 
-#run entrypoint
+# run entrypoint
 ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
