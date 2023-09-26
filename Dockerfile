@@ -32,7 +32,7 @@ ENV LC_ALL=C.UTF-8
 # setup agda
 ADD agda_install.sh ./
 RUN sudo chmod +x agda_install.sh
-RUN ./agda_install.sh
+#RUN ./agda_install.sh
 
 # setup 
 
