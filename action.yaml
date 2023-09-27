@@ -10,7 +10,8 @@ inputs:
       - autodetect
     initial: autodetect
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  - uses: satackey/action-docker-layer-caching@v0.0.11
+    continue-on-error: true
   args:
     - ${{ inputs.language }}
+  
