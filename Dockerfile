@@ -35,34 +35,32 @@ RUN pip install -r requirements.txt
 ##########ARG CABAL_INSTALL=3.2
 ##########
 ##########ENV PATH /home/${guest}/.local/bin:/opt/cabal/${CABAL_INSTALL}/bin:/opt/ghc/${GHC}/bin:/usr/local/bin:/usr/bin:/bin
+ENV LC_ALL=C.UTF-8
 
-# some happy workaround, probably not needed
-#ENV LC_ALL=C.UTF-8
-#
-## INSTALL AGDA
-#ENV LC_ALL=C.UTF-8
-#RUN apt-get install -y curl
-#
-## install stack
-#RUN curl -sSL https://get.haskellstack.org/ | sh
-#RUN stack config set system-ghc --global true
-#RUN stack config set install-ghc --global false
-#
-## clone hacked agda
-#RUN mkdir -p ~/.agda
-#RUN cd ~/.agda
-#RUN git clone --depth 1 -b master-sexp https://github.com/AndrejBauer/agda.git src
-#
-## set ghc and install hacked agda
-#ENV ghc_version=8.8.4
-#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
-#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
-#
-########## we dont need this
-##########RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install alex
-##########RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install happy
-#
-## add agda to path
+# INSTALL AGDA
+ENV LC_ALL=C.UTF-8
+RUN apt-get install -y curl
+
+# install stack
+RUN curl -sSL https://get.haskellstack.org/ | sh
+RUN stack config set system-ghc --global true
+RUN stack config set install-ghc --global false
+
+# clone hacked agda
+RUN mkdir -p ~/.agda
+RUN cd ~/.agda
+RUN git clone --depth 1 -b master-sexp https://github.com/AndrejBauer/agda.git src
+
+# set ghc and install hacked agda
+ENV ghc_version=8.8.4
+RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
+RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
+
+# we dont need this
+#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install alex
+#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install happy
+
+# add agda to path
 ENV PATH="~/.local/bin:$PATH"
 
 # INSTALL LEAN
@@ -147,8 +145,8 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
     lake --version; 
 
 # copy entrypoint
-#COPY entrypoint.sh /home/VL/entrypoint.sh
-#RUN sudo chmod +x /home/VL/entrypoint.sh
+COPY entrypoint.sh /home/VL/entrypoint.sh
+RUN sudo chmod +x /home/VL/entrypoint.sh
 
 # run entrypoint
-#ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
+ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
