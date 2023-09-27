@@ -6,7 +6,7 @@ echo "24. 09 2023 5"
 if [ $1 = agda ];
 then
     # move lib where 
-    PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
+    #PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
     #cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     #echo $PATH_WHERE_LIB_ASSISTANT
     #rm ${PATH_WHERE_LIB_ASSISTANT} -r
