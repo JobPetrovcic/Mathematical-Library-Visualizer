@@ -64,15 +64,85 @@ RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
 ENV PATH="~/.local/bin:$PATH"
 
 # INSTALL LEAN
-RUN wget -q https://raw.githubusercontent.com/leanprover-community/mathlib4/master/scripts/install_debian.sh && bash install_debian.sh 
-RUN rm -f install_debian.sh && source ~/.profile
+# first install build-deps from https://github.com/docker-library/buildpack-deps
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		ca-certificates \
+		curl \
+		gnupg \
+		netbase \
+		wget \
+		tzdata \
+	; \
+	rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		git \
+		mercurial \
+		openssh-client \
+		subversion \
+		\
+		procps \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN set -ex; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		autoconf \
+		automake \
+		bzip2 \
+		dpkg-dev \
+		file \
+		g++ \
+		gcc \
+		imagemagick \
+		libbz2-dev \
+		libc6-dev \
+		libcurl4-openssl-dev \
+		libdb-dev \
+		libevent-dev \
+		libffi-dev \
+		libgdbm-dev \
+		libglib2.0-dev \
+		libgmp-dev \
+		libjpeg-dev \
+		libkrb5-dev \
+		liblzma-dev \
+		libmagickcore-dev \
+		libmagickwand-dev \
+		libmaxminddb-dev \
+		libncurses5-dev \
+		libncursesw5-dev \
+		libpng-dev \
+		libpq-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		libssl-dev \
+		libtool \
+		libwebp-dev \
+		libxml2-dev \
+		libxslt-dev \
+		libyaml-dev \
+		make \
+		patch \
+		unzip \
+		xz-utils \
+		zlib1g-dev 
+
+ENV ELAN_HOME=/usr/local/elan \
+    PATH=/usr/local/elan/bin:$PATH \
+    LEAN_VERSION=leanprover/lean4:nightly
 
 RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --no-modify-path --default-toolchain $LEAN_VERSION; \
-#    chmod -R a+w $ELAN_HOME; \
-#    elan --version; \
-#    lean --version; \
-#    leanc --version; \
-#    lake --version; \
+    chmod -R a+w $ELAN_HOME; \
+    elan --version; \
+    lean --version; \
+    leanc --version; \
+    lake --version; 
 
 # copy entrypoint
 COPY entrypoint.sh /home/VL/entrypoint.sh
