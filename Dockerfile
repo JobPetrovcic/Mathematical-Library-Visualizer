@@ -149,4 +149,4 @@ COPY entrypoint.sh /home/VL/entrypoint.sh
 RUN sudo chmod +x /home/VL/entrypoint.sh
 
 # run entrypoint
-#ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
+ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
