@@ -77,7 +77,6 @@ prometheus-client==0.16.0
 prompt-toolkit==3.0.38
 psutil==5.9.5
 pure-eval==0.2.2
-py2neo==2021.2.3
 pycparser==2.21
 Pygments==2.15.1
 pyparsing==3.0.9

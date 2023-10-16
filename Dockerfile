@@ -142,11 +142,22 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
     elan --version; \
     lean --version; \
     leanc --version; \
-    lake --version; 
+    lake --version;
+
+# rm when testing on github
+RUN mkdir mockgitworkspace
+WORKDIR /mockgitworkspace
+ENV GITHUB_WORKSPACE=/mockgitworkspace
+RUN git clone https://github.com/algebraic-graphs/agda
+RUN mv agda mylib
+RUN mkdir agda-proof-assistent-assistent
+ADD agda-proof-assistent-assistent agda-proof-assistent-assistent
+
 
 # copy entrypoint
-COPY entrypoint.sh /home/VL/entrypoint.sh
-RUN sudo chmod +x /home/VL/entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
+RUN sudo chmod +x /entrypoint.sh
+ADD find_source.py .
 
 # run entrypoint
-ENTRYPOINT [ "/home/VL/entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh"]
