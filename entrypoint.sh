@@ -3,6 +3,8 @@
 echo "Your language is $1."
 echo "24. 09 2023 6"
 
+ls
+
 if [ $1 = agda ];
 then
     # move lib so agda-proof-assistant can access it
@@ -16,6 +18,8 @@ then
     for file in ${PATH_WHERE_LIB_ASSISTANT}/*.agda-lib;
     do
         # install lib
+        mkdir ~/.agda
+        touch ~/.agda/libraries
         echo "$(pwd)/${file}" >> ~/.agda/libraries
 
         #echo "Converting $(basename $file) to s-expressions."
@@ -27,7 +31,7 @@ then
         python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST} --recurse
 
         # convert to sexp
-        ~/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}" ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/imports.agda
+        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}" ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/imports.agda
 
         python3.10 main.py
         

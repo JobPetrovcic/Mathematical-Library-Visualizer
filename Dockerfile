@@ -145,14 +145,13 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
     lake --version;
 
 # rm when testing on github
-RUN mkdir mockgitworkspace
-WORKDIR /mockgitworkspace
-ENV GITHUB_WORKSPACE=/mockgitworkspace
-RUN git clone https://github.com/algebraic-graphs/agda
-RUN mv agda mylib
-RUN mkdir agda-proof-assistent-assistent
-ADD agda-proof-assistent-assistent agda-proof-assistent-assistent
-
+#RUN mkdir mockgitworkspace
+#WORKDIR /mockgitworkspace
+#ENV GITHUB_WORKSPACE=/mockgitworkspace
+#RUN git clone https://github.com/algebraic-graphs/agda
+#RUN mv agda mylib
+#RUN mkdir agda-proof-assistent-assistent
+#ADD agda-proof-assistent-assistent agda-proof-assistent-assistent
 
 # copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
