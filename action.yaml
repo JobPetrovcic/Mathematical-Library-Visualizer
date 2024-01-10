@@ -1,6 +1,6 @@
 # action.yml
 name: 'Formal Mathematics Library Visualizer'
-description: 'Add a visual representation of a formal mathematics library to your pages'
+description: 'Add a visual representation of a formal mathematics library to your github pages.'
 inputs:
   language:
     description: 'Language of your formal library. Supported options are Agda or Lean.'
