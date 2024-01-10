@@ -13,8 +13,11 @@ then
     rm ${PATH_WHERE_LIB_ASSISTANT} -r
     mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}
 
+    echo "CURRENT DIR"
+    ls
+    echo "END OF CURRENT DIR"
+    
     # go through .agda-lib files in directory; take the first
-    # TODO 
     for file in ${PATH_WHERE_LIB_ASSISTANT}/*.agda-lib;
     do
         # install lib
