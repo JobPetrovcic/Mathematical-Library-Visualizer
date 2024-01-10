@@ -9,8 +9,16 @@ inputs:
       - lean
       - autodetect
     initial: autodetect
+  mode:
+    description: 'Choose how to present your library in your github pages.'
+    options:
+      - index # Add an index.html featuring your library.
+      - standalone # Add a standalone.html featuring your library. 
+      - embed # Creates an embed.html which can be embedded into your website. Link to it using the <link TODO>
+    initial: standalone
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.language }}
+    - ${{ inputs.mode }}
