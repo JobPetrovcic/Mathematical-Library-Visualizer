@@ -2,8 +2,11 @@
 
 echo "Your language is $1."
 echo "8 1 2024"
+pwd
+echo ${GITHUB_WORKSPACE}
 
 ls
+ls ${GITHUB_WORKSPACE}
 
 #if [ $1 = agda ];
 #then
