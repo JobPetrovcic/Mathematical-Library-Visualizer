@@ -13,7 +13,7 @@ then
     mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}
 
     # move indexer.py to github workspace
-    mv /indexer.py .
+    mv /find_source.py .
     
     # go through .agda-lib files in directory; take the first
     for file in ${PATH_WHERE_LIB_ASSISTANT}/*.agda-lib;
