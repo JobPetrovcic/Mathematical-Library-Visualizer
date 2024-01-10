@@ -11,7 +11,6 @@ inputs:
     initial: autodetect
 runs:
   using: 'docker'
-  context: .
   image: 'Dockerfile'
   args:
     - ${{ inputs.language }}
