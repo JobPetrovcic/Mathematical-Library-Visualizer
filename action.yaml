@@ -1,6 +1,6 @@
 # action.yml
 name: 'Formal Mathematics Library Visualizer'
-description: 'Add a visual representation of a formal mathematics library to your README.'
+description: 'Add a visual representation of a formal mathematics library to your pages'
 inputs:
   language:
     description: 'Language of your formal library. Supported options are Agda or Lean.'
@@ -11,6 +11,8 @@ inputs:
     initial: autodetect
 runs:
   using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.language }}
+    with:
+      context: .
+      image: 'Dockerfile'
+      args:
+        - ${{ inputs.language }}
