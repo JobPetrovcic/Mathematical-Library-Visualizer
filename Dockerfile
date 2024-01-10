@@ -156,7 +156,7 @@ RUN apt-get update && apt-get install -y -q ghc ghc-prof ghc-doc
 # copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh
-ADD find_source.py .
+ADD find_source.py /
 
 # run entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
