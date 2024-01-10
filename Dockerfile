@@ -52,9 +52,9 @@ RUN cd ~/.agda
 RUN git clone --depth 1 -b master-sexp https://github.com/AndrejBauer/agda.git src
 
 # set ghc and install hacked agda
-ENV ghc_version=8.8.4
-RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
-RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
+# ENV ghc_version=8.8.4
+# RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
+# RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
 
 # we dont need this
 #RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install alex
