@@ -156,7 +156,7 @@ RUN set -ex; \
 # copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh
-ADD find_source.py .
+ADD find_source.py ${GITHUB_WORKSPACE}/
 
 # run entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
