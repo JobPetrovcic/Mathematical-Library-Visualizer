@@ -156,7 +156,7 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
 ADD entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh
 ADD find_source.py /
-ADD library_installs /
+ADD library_installs_sh /
 
 # run entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
