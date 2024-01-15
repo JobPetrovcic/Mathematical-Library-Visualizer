@@ -46,10 +46,10 @@ RUN curl -sSL https://get.haskellstack.org/ | sh
 RUN stack config set system-ghc --global true
 RUN stack config set install-ghc --global false
 
-## clone hacked agda
+# clone hacked agda, VERSION: 2.6.3
 RUN mkdir -p ~/.agda
 RUN cd ~/.agda
-RUN git clone --depth 1 -b master-sexp https://github.com/AndrejBauer/agda.git src
+RUN git clone --depth 1 -b release-2.6.3-sexp https://github.com/AndrejBauer/agda.git src
 
 # set ghc and install hacked agda
 ENV ghc_version=8.8.4
@@ -156,6 +156,7 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
 ADD entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh
 ADD find_source.py /
+ADD library_installs /
 
 # run entrypoint
 ENTRYPOINT ["/entrypoint.sh"]

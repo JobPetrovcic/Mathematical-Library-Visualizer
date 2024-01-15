@@ -7,6 +7,20 @@ mkdir output
 
 if [ $1 = agda ];
 then
+    # add agda to path
+    export PATH=/root/.local/bin:$PATH PATH
+
+    # install make and other necessary software
+    apt-get install build-essential
+
+    # create folder where to put library files to install
+    mkdir /libraries_installs_files
+
+    # install libraries listed in the 
+    for file in /library_installs_sh/*.sh; do
+        sh $file
+    done
+
     # move lib so agda-proof-assistant can access it
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
@@ -32,7 +46,7 @@ then
         # create imports.agda which contains all .agda 
         python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST} --recurse
 
-        # convert to sexp
+        # convert to sexp, use absolute path
         /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/{PATH_WHERE_LIB_ASSISTANT}" ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/imports.agda
 
         python3.10 main.py
