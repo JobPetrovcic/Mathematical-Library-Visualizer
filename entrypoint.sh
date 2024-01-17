@@ -2,7 +2,7 @@
 
 echo "Your language is $1."
 
-# create folder where to output the 
+# create folder where to output data_graph.json, visualize.json
 mkdir output
 
 if [ $1 = agda ];
@@ -15,7 +15,7 @@ then
 
     # create folder where to put library files to install
     mkdir /libraries_installs_files
-
+    ls /
     # install libraries listed in the 
     for file in /library_installs_sh/*.sh; do
         sh $file

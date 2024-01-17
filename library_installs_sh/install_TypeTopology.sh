@@ -12,6 +12,6 @@ cd TypeTopology
 make
 
 # add it to agda imports
-echo "$/libraries_installs_files/TypeTopology/typetopology.agda-lib" >> ~/.agda/libraries
+echo "/libraries_installs_files/TypeTopology/typetopology.agda-lib" >> ~/.agda/libraries
 
 echo "Installed TypeTopology."
