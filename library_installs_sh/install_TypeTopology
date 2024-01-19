@@ -1,8 +1,8 @@
 # terminate on error
 set -e
 
-# go to designated library where we install the libraries
-cd /libraries_installs_files
+# go to designated folder where we install the libraries
+cd /library_installs_files
 
 # copy files
 git clone https://github.com/martinescardo/TypeTopology
@@ -12,6 +12,6 @@ cd TypeTopology
 make
 
 # add it to agda imports
-echo "/libraries_installs_files/TypeTopology/typetopology.agda-lib" >> ~/.agda/libraries
+echo "/library_installs_files/TypeTopology/typetopology.agda-lib" >> ~/.agda/libraries
 
 echo "Installed TypeTopology."

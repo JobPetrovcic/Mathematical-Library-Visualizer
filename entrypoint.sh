@@ -14,12 +14,14 @@ then
     apt-get install build-essential
 
     # create folder where to put library files to install
-    mkdir /libraries_installs_files
-    ls /
+    mkdir /library_installs_files
+    
     # install libraries listed in the 
     for file in /library_installs_sh/*.sh; do
         sh $file
     done
+    echo "State of ~/.agda/libraries:"
+    cat  ~/.agda/libraries
 
     # move lib so agda-proof-assistant can access it
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
@@ -29,6 +31,8 @@ then
 
     # move indexer.py to github workspace
     mv /find_source.py .
+
+    # we compile the file or the library to get the data, TODO
     
     # go through .agda-lib files in directory; take the first
     for file in ${PATH_WHERE_LIB_ASSISTANT}/*.agda-lib;
