@@ -21,7 +21,7 @@ then
         sh $file
     done
     echo "State of ~/.agda/libraries:"
-    ~
+    ls ~/.agda -la
     cat  ~/.agda/libraries
 
     # move lib so agda-proof-assistant can access it
