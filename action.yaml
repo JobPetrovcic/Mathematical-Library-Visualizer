@@ -3,12 +3,19 @@ name: 'Formal Mathematics Library Visualizer'
 description: 'Add a visual representation of a formal mathematics library to your github pages.'
 inputs:
   language:
-    description: 'Language of your formal library. Supported options are Agda or Lean.'
+    description: 'Language of your project. Supported options are Agda or Lean.'
     options:
       - agda
       - lean
       - autodetect
     initial: autodetect
+  file_type:
+    description: 'Choose whether to compile a single file or library. Note: In both cases the file, or the .agda-stdlib file should be in the lowest level of your github repo.'
+    options:
+      # [name of the file].[language] # provide a name of the file you want visualized.
+      - everything.agda # For libraries, list of all of our modules (PREFFERED).
+      - autogenerate # Generate an everything.agda or everything.lean of your library (NOT RECOMMENDED).
+    initial: autogenerate
   mode:
     description: 'Choose how to present your library in your github pages.'
     options:
@@ -21,4 +28,5 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.language }}
+    - ${{ inputs.file_type }}
     - ${{ inputs.mode }}

@@ -1,11 +1,11 @@
 #!/bin/sh -l
 
 echo "Your language is $1."
+echo "Compiling file: $2."
+echo "Mode of presentation: $3."
 
 # create folder where to output data_graph.json, visualize.json
 mkdir output
-touch blabla.txt
-ls -la
 
 if [ $1 = agda ];
 then
@@ -18,10 +18,11 @@ then
     # create folder where to put library files to install
     mkdir /library_installs_files
 
-    # create agda imports
+    # create agda libraries
+    mkdir ~/.agda
     touch ~/.agda/libraries
     
-    # install libraries listed in the 
+    # install libraries in the library_installs_sh
     for file in /library_installs_sh/*.sh; do
         sh $file
     done
@@ -42,9 +43,7 @@ then
     # go through .agda-lib files in directory; take the first
     for file in ${PATH_WHERE_LIB_ASSISTANT}/*.agda-lib;
     do
-        # install libs
-        mkdir ~/.agda
-
+        # install lib
         echo "$(pwd)/${file}" >> ~/.agda/libraries
 
         echo "Converting $(basename $file) to s-expressions."
