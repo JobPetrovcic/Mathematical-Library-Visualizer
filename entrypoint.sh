@@ -4,6 +4,8 @@ echo "Your language is $1."
 
 # create folder where to output data_graph.json, visualize.json
 mkdir output
+touch blabla.txt
+ls -la
 
 if [ $1 = agda ];
 then
@@ -42,7 +44,6 @@ then
     do
         # install libs
         mkdir ~/.agda
-        touch ~/.agda/libraries
 
         echo "$(pwd)/${file}" >> ~/.agda/libraries
 
