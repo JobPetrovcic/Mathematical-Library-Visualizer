@@ -21,6 +21,7 @@ then
         sh $file
     done
     echo "State of ~/.agda/libraries:"
+    ~
     cat  ~/.agda/libraries
 
     # move lib so agda-proof-assistant can access it
@@ -40,6 +41,7 @@ then
         # install libs
         mkdir ~/.agda
         touch ~/.agda/libraries
+
         echo "$(pwd)/${file}" >> ~/.agda/libraries
 
         echo "Converting $(basename $file) to s-expressions."

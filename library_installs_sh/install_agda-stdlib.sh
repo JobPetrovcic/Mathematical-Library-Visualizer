@@ -8,6 +8,7 @@ cd /library_installs_files
 wget -O agda-stdlib.tar https://github.com/agda/agda-stdlib/archive/v2.0.tar.gz
 tar -zxvf agda-stdlib.tar
 
+ls ~
 # add it to agda imports
 echo "/library_installs_files/agda-stdlib/agda-stdlib.agda-lib" >> ~/.agda/libraries
 
