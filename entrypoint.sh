@@ -15,13 +15,15 @@ then
 
     # create folder where to put library files to install
     mkdir /library_installs_files
+
+    # create agda imports
+    touch ~/.agda/libraries
     
     # install libraries listed in the 
     for file in /library_installs_sh/*.sh; do
         sh $file
     done
     echo "State of ~/.agda/libraries:"
-    ls ~/.agda -la
     cat  ~/.agda/libraries
 
     # move lib so agda-proof-assistant can access it
