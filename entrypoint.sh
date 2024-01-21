@@ -29,40 +29,60 @@ then
     echo "State of ~/.agda/libraries:"
     cat  ~/.agda/libraries
 
-    # move lib so agda-proof-assistant can access it
+    # move the lib so agda-proof-assistant can access it
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     rm ${PATH_WHERE_LIB_ASSISTANT} -r
     mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}
+    echo "Where we moved the library:"
+
+    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
 
     # move indexer.py to github workspace
     mv /find_source.py .
 
     # we compile the file or the library to get the data, TODO
     
-    # go through .agda-lib files in directory; take the first
-    for file in ${PATH_WHERE_LIB_ASSISTANT}/*.agda-lib;
-    do
-        # install lib
-        echo "$(pwd)/${file}" >> ~/.agda/libraries
+    if [ $2 = autogenerate ]
+    then
+        # go through .agda-lib files in directory; take the first
+        for file in ${PATH_WHERE_LIB_ASSISTANT}/mylib/*.agda-lib;
+        do
+            # install lib
+            echo "$(pwd)/${file}" >> ~/.agda/libraries
 
-        echo "Converting $(basename $file) to s-expressions."
+            echo "Converting $(basename $file) to s-expressions."
 
-        # get source name
-        SOURCE_DEST=$(python3.10 find_source.py ${file})
+            # get source name
+            SOURCE_DEST=$(python3.10 find_source.py ${file})
 
-        # create imports.agda which contains all .agda 
-        python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST} --recurse
+            # create imports.agda which contains all .agda 
+            python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST} --recurse
+            echo "Source destionation: ${SOURCE_DEST}"
+            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/"
+            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/"
+            # convert to sexp, use absolute path
+            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/imports.agda"
 
-        # convert to sexp, use absolute path
-        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/{PATH_WHERE_LIB_ASSISTANT}" ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/imports.agda
+            break
+        done
+    else
+        # go through .agda-lib files in directory; take the first
+        for file in ${PATH_WHERE_LIB_ASSISTANT}/mylib/*.agda-lib; # TODO is that supposed to be mylib
+        do
+            # install lib
+            ls ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib
 
-        python3.10 main.py
+            # convert to sexp, use absolute path
+            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2" # TODO
 
-        mv convert_to_web/graph_data.js ${GITHUB_WORKSPACE}/output
-        mv convert_to_web/visualize.html ${GITHUB_WORKSPACE}/output 
-        mv convert_to_web/index.html ${GITHUB_WORKSPACE}/output 
-
-        break
-    done
+            break
+        done
+    fi
+    
+    # convert sexp to graph_data.json
+    python3.10 main.py
+    mv convert_to_web/graph_data.js ${GITHUB_WORKSPACE}/output
+    mv convert_to_web/visualize.html ${GITHUB_WORKSPACE}/output 
+    mv convert_to_web/index.html ${GITHUB_WORKSPACE}/output 
 fi
