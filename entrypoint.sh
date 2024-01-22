@@ -33,7 +33,8 @@ then
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     rm ${PATH_WHERE_LIB_ASSISTANT} -r
-    mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT} -r# TODO something is not right here
+    mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
+    mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}/mylib -r # TODO something is not right here
 
     echo "Where we moved the library:" #remove
     ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
@@ -69,16 +70,10 @@ then
             break
         done
     else
-        # go through .agda-lib files in directory; take the first
-        for file in ${PATH_WHERE_LIB_ASSISTANT}/mylib/*.agda-lib; # TODO is that supposed to be mylib
-        do
-            ls ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib # remove
+        ls ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib # remove
 
-            # convert to sexp, use absolute path
-            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2" # TODO
-
-            break
-        done
+        # convert to sexp, use absolute path
+        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2" # TODO
     fi
     
     # convert sexp to graph_data.json
