@@ -39,7 +39,7 @@ then
     # move the files that we want to compile so agda-proof-assistant can access it
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
-    mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}/mylib -r # TODO something is not right here
+    mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
 
     echo "Where we moved the library:" #remove
     ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
