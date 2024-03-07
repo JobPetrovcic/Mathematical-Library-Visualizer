@@ -29,10 +29,15 @@ then
     echo "State of ~/.agda/libraries:"
     cat  ~/.agda/libraries
 
-    # move the lib so agda-proof-assistant can access it
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
+
+    # clear the test_data/agda/test_lib 
+    # TODO do this for lean also
+    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}
+    rm * -r
+
+    # move the files that we want to compile so agda-proof-assistant can access it
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
-    rm ${PATH_WHERE_LIB_ASSISTANT} -r
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
     mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}/mylib -r # TODO something is not right here
 
