@@ -29,7 +29,7 @@ then
     echo "State of ~/.agda/libraries:"
     cat  ~/.agda/libraries
     echo "State of /library_installs_files/agda-stdlib/:"
-    ls /library_installs_files/agda-stdlib/
+    ls /library_installs_files
 
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
 
