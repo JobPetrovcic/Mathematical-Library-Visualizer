@@ -28,6 +28,8 @@ then
     done
     echo "State of ~/.agda/libraries:"
     cat  ~/.agda/libraries
+    echo "State of /library_installs_files/agda-stdlib/:"
+    ls /library_installs_files/agda-stdlib/
 
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
 
@@ -39,7 +41,7 @@ then
     # move the files that we want to compile so agda-proof-assistant can access it
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
-    mv ${GITHUB_WORKSPACE}/mylib ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
+    mv ${GITHUB_WORKSPACE}/mylib/* ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
 
     echo "Where we moved the library:" #remove
     ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
