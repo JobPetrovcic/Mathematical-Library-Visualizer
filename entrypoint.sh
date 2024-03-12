@@ -21,6 +21,7 @@ then
     # create agda libraries
     mkdir ~/.agda
     touch ~/.agda/libraries
+    touch ~/.agda/defaults
     
     # install libraries in the library_installs_sh
     for file in /library_installs_sh/*.sh; do

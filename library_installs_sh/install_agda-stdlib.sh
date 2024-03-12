@@ -11,5 +11,6 @@ folder_name=`tar -tzf agda-stdlib.tar | head -1 | cut -f1 -d"/"`
 
 # add it to agda imports
 echo "/library_installs_files/${folder_name}/standard-library.agda-lib" >> ~/.agda/libraries
+echo "standard-library" >> ~/.agda/defaults
 
 echo "Installed agda-stdlib."
