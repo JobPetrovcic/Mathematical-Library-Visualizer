@@ -3,6 +3,7 @@
 echo "Your language is $1."
 echo "Compiling file: $2."
 echo "Mode of presentation: $3."
+echo "Install additional libraries: $4."
 
 # create folder where to output data_graph.json, visualize.json
 mkdir output
@@ -23,14 +24,17 @@ then
     touch ~/.agda/libraries
     touch ~/.agda/defaults
     
-    # install libraries in the library_installs_sh
-    for file in /library_installs_sh/*.sh; do
-        sh $file
-    done
-    echo "State of ~/.agda/libraries:"
-    cat  ~/.agda/libraries
-    echo "State of /library_installs_files/agda-stdlib-2.0:"
-    ls /library_installs_files/agda-stdlib-2.0
+    if [ $4 = yes ]
+    then
+        # install libraries in the library_installs_sh
+        for file in /library_installs_sh/*.sh; do
+            sh $file
+        done
+        echo "State of ~/.agda/libraries:"
+        cat  ~/.agda/libraries
+        echo "State of /library_installs_files/agda-stdlib-2.0:"
+        ls /library_installs_files/agda-stdlib-2.0
+    fi
 
     PATH_WHERE_LIB_ASSISTANT="test_data/agda/test_lib"
 
@@ -64,6 +68,9 @@ then
 
             # get source name
             SOURCE_DEST=$(python3.10 find_source.py ${file})
+            echo "Getting a list of all files in the folder ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}..."
+            echo "This folder contains:"
+            ls ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}
 
             # create imports.agda which contains all .agda 
             python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST} --recurse

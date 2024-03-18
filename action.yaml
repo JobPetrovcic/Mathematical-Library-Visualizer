@@ -23,6 +23,12 @@ inputs:
       - standalone # Add a standalone.html featuring your library. 
       - embed # Creates an embed.html which can be embedded into your website. Link to it using the <link TODO>
     initial: standalone
+  install_libs:
+    description: 'Choose whether to install additional libraries before checking your project. For a list of currently available libraries, check: https://github.com/JobPetrovcic/test_workflows' # TODO
+    options:
+      - yes
+      - no
+    initial: yes
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -30,3 +36,4 @@ runs:
     - ${{ inputs.language }}
     - ${{ inputs.file_type }}
     - ${{ inputs.mode }}
+    - ${{ inputs.install_libs }}
