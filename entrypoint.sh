@@ -68,19 +68,19 @@ then
 
             # get source name
             SOURCE_DEST=$(python3.10 find_source.py ${file})
-            echo "Getting a list of all files in the folder ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}..."
+            echo "Getting a list of all files in the folder ${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}..."
             echo "This folder contains:"
-            ls ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}
+            ls ${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}
 
             # create imports.agda which contains all .agda 
-            python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST} --recurse
+            python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST} --recurse
 
-            echo "Source destionation: ${SOURCE_DEST}" # remove
+            echo "Source destination: ${SOURCE_DEST}" # remove
             ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
-            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/" # remove
+            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/" # remove
 
             # convert to sexp, use absolute path
-            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/${SOURCE_DEST}/imports.agda"
+            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
 
             break
         done
