@@ -79,6 +79,9 @@ then
             ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
             ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/" # remove
 
+            echo "Imports.agda contains:"
+            cat "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
+
             # convert to sexp, use absolute path
             /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
 
