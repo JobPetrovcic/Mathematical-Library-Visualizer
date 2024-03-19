@@ -49,7 +49,8 @@ RUN stack config set install-ghc --global false
 # clone hacked agda, VERSION: 2.6.3
 RUN mkdir -p ~/.agda
 RUN cd ~/.agda
-RUN git clone --depth 1 -b release-2.6.3-sexp https://github.com/AndrejBauer/agda.git src
+RUN git clone --depth 1 https://github.com/AndrejBauer/agda.git src
+#RUN git clone --depth 1 -b release-2.6.3-sexp https://github.com/AndrejBauer/agda.git src
 
 # set ghc and install hacked agda
 ENV ghc_version=8.8.4
