@@ -107,4 +107,5 @@ then
     mv convert_to_web/graph_data.js ${GITHUB_WORKSPACE}/output
     mv convert_to_web/visualize.html ${GITHUB_WORKSPACE}/output 
     mv convert_to_web/index.html ${GITHUB_WORKSPACE}/output 
+    mv convert_to_web/scripts ${GITHUB_WORKSPACE}/output
 fi
