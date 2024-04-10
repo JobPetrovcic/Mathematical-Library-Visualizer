@@ -41,10 +41,13 @@ ENV LC_ALL=C.UTF-8
 ENV LC_ALL=C.UTF-8
 RUN apt-get install -y curl
 
+ENV ghc_version=9.0.2
+
 # install stack
 RUN curl -sSL https://get.haskellstack.org/ | sh
-RUN stack config set system-ghc --global true
-RUN stack config set install-ghc --global false
+#RUN stack config set system-ghc --global true
+#RUN stack config set install-ghc --global false
+RUN stack --resolver ghc-${ghc_version} setup
 
 # clone hacked agda, VERSION: 2.6.3
 RUN mkdir -p ~/.agda
@@ -53,7 +56,7 @@ RUN cd ~/.agda
 RUN git clone --depth 1 -b master https://github.com/JobPetrovcic/agda src
 
 # set ghc and install hacked agda
-ENV ghc_version=9.0.2
+
 RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
 RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
 
