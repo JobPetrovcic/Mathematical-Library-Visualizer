@@ -16,7 +16,7 @@ jobs:
           token: ${{ secrets.ACCESSPROOFASSISTANT }}
           ref: master
           path: agda-proof-assistent-assistent
-      - uses: JobPetrovcic/Mathematical-Library-Vizualizer
+      - uses: JobPetrovcic/Mathematical-Library-Vizualizer@main
         with:
           language: agda
           file_type: autogenerate
