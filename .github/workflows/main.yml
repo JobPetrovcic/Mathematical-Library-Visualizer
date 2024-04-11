@@ -1,0 +1,33 @@
+name: minimal example
+on: [push]
+jobs:
+  check:
+    name: Visualize library
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: UniMath/agda-unimath
+          ref: master
+          path: mylib
+      - uses: actions/checkout@v4
+        with:
+          repository: JobPetrovcic/agda-proof-assistent-assistent
+          token: ${{ secrets.ACCESSPROOFASSISTANT }}
+          ref: master
+          path: agda-proof-assistent-assistent
+      - uses: JobPetrovcic/test_workflows@main
+        with:
+          language: agda
+          file_type: autogenerate
+          mode : standalone
+          install_libs : no
+      - uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACCESSPROOFASSISTANT }}
+        with:
+          source-directory: 'output'
+          destination-github-username: 'JobPetrovcic'
+          destination-repository-name: 'JobPetrovcic.github.io'
+          user-email: job1.petrovcic@gmail.com
+          target-branch: main
