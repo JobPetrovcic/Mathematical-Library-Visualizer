@@ -101,10 +101,10 @@ then
     else
         echo "Converting $(basename $2) to s-expressions."
 
-        echo "${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2"
+        cd ${PATH_WHERE_LIB_ASSISTANT}/mylib
 
-        # convert to sexp, use absolute path
-        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2"
+        # convert to sexp, use relative path
+        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" $5 $2
     fi
 
     echo "Finished typechecking."
