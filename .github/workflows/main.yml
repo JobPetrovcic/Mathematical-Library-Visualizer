@@ -19,7 +19,7 @@ jobs:
       - uses: JobPetrovcic/Mathematical-Library-Vizualizer@main
         with:
           language: agda
-          file_type: autogenerate
+          file_type: src/everything.lagda.md
           mode : standalone
           install_libs : no
       - uses: cpina/github-action-push-to-another-repository@main
