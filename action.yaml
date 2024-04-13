@@ -10,31 +10,31 @@ inputs:
       - autodetect
     initial: autodetect
   file_type:
-    description: 'Choose whether to compile a single file or library. Note: In both cases the file, or the .agda-stdlib file should be in the lowest level of your github repo.'
+    description: "Choose whether to compile a single file or library. Note: In both cases the file, or the .agda-stdlib file should be in the lowest level of your github repo."
     options:
       # [repository-relative/path/to/name of the file].[language] # provide a name of the file you want visualized.
       - everything.agda # For libraries, list of all of our modules (PREFFERED).
       - autogenerate # Generate an everything.agda or everything.lean of your library (NOT RECOMMENDED).
     initial: autogenerate
   mode:
-    description: 'Choose how to present your library in your github pages.'
+    description: "Choose how to present your library in your github pages."
     options:
       - index # Add an index.html featuring your library.
       - standalone # Add a standalone.html featuring your library. 
       - embed # Creates an embed.html which can be embedded into your website. Link to it using the <link TODO>
     initial: standalone
   install_libs:
-    description: 'Choose whether to install additional libraries before checking your project. For a list of currently available libraries, check: https://github.com/JobPetrovcic/Mathematical-Library-Vizualizer' # TODO
+    description: "Choose whether to install additional libraries before checking your project. For a list of currently available libraries, check: https://github.com/JobPetrovcic/Mathematical-Library-Vizualizer"
     options:
       - yes
       - no
     initial: yes
   flags:
-    description: 'An optional compiler/typechecker flags input. Example: "-flag1 -flag2".'
-    default: '' # empty value if not provided
+    description: "An optional compiler/typechecker flags input. Example: "-flag1 -flag2"."
+    default: "" # empty value if not provided
   additional_commands:
-    description: 'Execute additional command (run in your repo's folder) before typechecking the file. This can be used, for example, to create your own everything.[language] file for this tool to typecheck and visualize.'
-    default: '' # empty value if not provided
+    description: "Execute additional command (run in your repo's folder) before typechecking the file. This can be used, for example, to create your own everything.[language] file for this tool to typecheck and visualize."
+    default: "" # empty value if not provided
 runs:
   using: 'docker'
   image: 'Dockerfile'
