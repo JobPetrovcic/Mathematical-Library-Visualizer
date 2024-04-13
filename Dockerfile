@@ -7,8 +7,8 @@ RUN apt-get update -q \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y -q git
 RUN apt-get update && apt-get install -y -q ghc ghc-prof ghc-doc
+RUN apt-get install -y -q git
 
 # install python and requirements
 ADD requirements.txt ./
