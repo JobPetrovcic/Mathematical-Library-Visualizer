@@ -55,7 +55,7 @@ RUN stack --resolver ghc-${ghc_version} setup
 RUN mkdir -p ~/.agda
 RUN cd ~/.agda
 #RUN git clone --depth 1 https://github.com/AndrejBauer/agda.git src
-RUN git clone --depth 1 -b master https://github.com/JobPetrovcic/agda src
+RUN git clone --depth 1 -b release-2.6.4.3-base https://github.com/JobPetrovcic/agda src
 
 # set ghc and install hacked agda
 
