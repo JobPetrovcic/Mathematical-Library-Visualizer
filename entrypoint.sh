@@ -54,6 +54,7 @@ then
 
     # run potential additional commands
     cd ${PATH_WHERE_LIB_ASSISTANT}/mylib
+    ls -la
     echo "Executing additional commands: $6"
     eval $6
 
