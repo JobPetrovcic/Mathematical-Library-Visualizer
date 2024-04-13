@@ -22,6 +22,7 @@ jobs:
           file_type: src/everything.lagda.md
           mode : standalone
           install_libs : no
+          additional_commands: make src/everything.lagda.md
       - uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACCESSPROOFASSISTANT }}

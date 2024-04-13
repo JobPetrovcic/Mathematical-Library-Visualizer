@@ -50,6 +50,14 @@ then
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
     mv ${GITHUB_WORKSPACE}/mylib/* ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
 
+    # run potential additional commands
+    cd ${PATH_WHERE_LIB_ASSISTANT}/mylib
+    echo "Executing additional commands: $6"
+    eval $6
+
+    # go back
+    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
+
     echo "Where we moved the library:" #remove
     ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
     echo "The library:" #remove

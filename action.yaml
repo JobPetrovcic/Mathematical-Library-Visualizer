@@ -32,7 +32,9 @@ inputs:
   flags:
     description: 'An optional compiler/typechecker flags input. Example: "-flag1 -flag2".'
     default: '' # empty value if not provided
-  
+  additional_commands:
+    description: 'Execute additional command (run in your repo's folder) before typechecking the file. This can be used, for example, to create your own everything.[language] file for this tool to typecheck and visualize.'
+    default: '' # empty value if not provided
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -42,3 +44,4 @@ runs:
     - ${{ inputs.mode }}
     - ${{ inputs.install_libs }}
     - ${{ inputs.flags }}
+    - ${{ additional_commands }}
