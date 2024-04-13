@@ -12,7 +12,7 @@ inputs:
   file_type:
     description: 'Choose whether to compile a single file or library. Note: In both cases the file, or the .agda-stdlib file should be in the lowest level of your github repo.'
     options:
-      # [name of the file].[language] # provide a name of the file you want visualized.
+      # [repositoty-relative/path/to/name of the file].[language] # provide a name of the file you want visualized.
       - everything.agda # For libraries, list of all of our modules (PREFFERED).
       - autogenerate # Generate an everything.agda or everything.lean of your library (NOT RECOMMENDED).
     initial: autogenerate
@@ -24,11 +24,15 @@ inputs:
       - embed # Creates an embed.html which can be embedded into your website. Link to it using the <link TODO>
     initial: standalone
   install_libs:
-    description: 'Choose whether to install additional libraries before checking your project. For a list of currently available libraries, check: https://github.com/JobPetrovcic/test_workflows' # TODO
+    description: 'Choose whether to install additional libraries before checking your project. For a list of currently available libraries, check: https://github.com/JobPetrovcic/Mathematical-Library-Vizualizer' # TODO
     options:
       - yes
       - no
     initial: yes
+  flags:
+    description: 'An optional compiler/typechecker flags input. Example: "-flag1 -flag2".'
+    default: '' # empty value if not provided
+  
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -37,3 +41,4 @@ runs:
     - ${{ inputs.file_type }}
     - ${{ inputs.mode }}
     - ${{ inputs.install_libs }}
+    - ${{ inputs.flags }}

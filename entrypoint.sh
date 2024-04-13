@@ -1,9 +1,11 @@
 #!/bin/sh -l
+set -e
 
 echo "Your language is $1."
 echo "Compiling file: $2."
 echo "Mode of presentation: $3."
 echo "Install additional libraries: $4."
+echo "You flags are: $5"
 
 # create folder where to output data_graph.json, visualize.json
 mkdir output
@@ -54,17 +56,20 @@ then
     # move indexer.py to github workspace
     mv /find_source.py .
 
-    # we compile the file or the library to get the data, TODO
+    # install library
+    for file in ${PATH_WHERE_LIB_ASSISTANT}/mylib/*.agda-lib;
+    do
+        # go through .agda-lib files in directory and
+        # install libs
+        echo "$(pwd)/${file}" >> ~/.agda/libraries
+    done
     
     if [ $2 = autogenerate ]
     then
         # go through .agda-lib files in directory; take the first
         for file in ${PATH_WHERE_LIB_ASSISTANT}/mylib/*.agda-lib;
         do
-            # install lib
-            echo "$(pwd)/${file}" >> ~/.agda/libraries
-
-            echo "Converting $(basename $file) to s-expressions."
+            echo "Converting library $(basename $file) to s-expressions."
 
             # get source name
             SOURCE_DEST=$(python3.10 find_source.py ${file})
@@ -75,33 +80,33 @@ then
             # create imports.agda which contains all .agda 
             python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST} --recurse
 
-            echo "Source destination: ${SOURCE_DEST}" # remove
-            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
-            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/" # remove
-
-            echo "Imports.agda contains:"
+            echo "Generated imports.agda contains:"
             cat "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
 
+            echo "Typechecking..."
             # convert to sexp, use absolute path
-            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda" --cubical-compatible
+            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
 
-            echo "In the test_data/agda is:"
-            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/test_data/agda"
-
-            echo "In the lib assistant directory is:"
-            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}"
-
-            echo "In the sexp directory is:"
-            ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp"
+            
             break
         done
     else
-        #ls ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib # remove
+        echo "Converting $(basename $2) to s-expressions."
 
         # convert to sexp, use absolute path
-        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2" # TODO
+        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2"
     fi
-    
+
+    echo "Finished typechecking."
+    echo "In the test_data/agda are:"
+    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/test_data/agda"
+
+    echo "In the lib assistant directory are:"
+    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}"
+
+    echo "In the sexp directory are:"
+    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp"
+
     # convert sexp to graph_data.json
     python3.10 main.py
     mv convert_to_web/graph_data.js ${GITHUB_WORKSPACE}/output
