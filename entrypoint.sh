@@ -51,8 +51,9 @@ then
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
     mv ${GITHUB_WORKSPACE}/mylib/* ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
-    ls ${PATH_WHERE_LIB_ASSISTANT}/mylib
-    
+    mv ${GITHUB_WORKSPACE}/mylib/.git ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
+    ls ${GITHUB_WORKSPACE}/mylib -la
+
     # run potential additional commands
     cd ${PATH_WHERE_LIB_ASSISTANT}/mylib
     ls -la
