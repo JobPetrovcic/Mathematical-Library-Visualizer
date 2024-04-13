@@ -44,6 +44,7 @@ then
     # TODO do this for lean also
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     rm -rf .git
+    rm -rf ${GITHUB_WORKSPACE}/.git
     cd ${PATH_WHERE_LIB_ASSISTANT}
     rm * -r
 
