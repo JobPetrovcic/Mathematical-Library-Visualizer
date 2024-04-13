@@ -44,4 +44,4 @@ runs:
     - ${{ inputs.mode }}
     - ${{ inputs.install_libs }}
     - ${{ inputs.flags }}
-    - ${{ additional_commands }}
+    - ${{ inputs.additional_commands }}
