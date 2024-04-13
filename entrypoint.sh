@@ -42,13 +42,13 @@ then
 
     # clear the test_data/agda/test_lib 
     # TODO do this for lean also
-    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
-    rm -rf .git
+    cd /agda-proof-assistent-assistent
+    rm -f .git
     cd ${PATH_WHERE_LIB_ASSISTANT}
     rm * -r
 
     # move the files that we want to compile so agda-proof-assistant can access it
-    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
+    cd /agda-proof-assistent-assistent
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
     mv ${GITHUB_WORKSPACE}/mylib/* ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
 
@@ -59,14 +59,14 @@ then
     eval $6
 
     # go back
-    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
+    cd /agda-proof-assistent-assistent
 
     echo "Where we moved the library:" #remove
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
+    ls "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
     echo "The library:" #remove
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
+    ls "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
     echo "The library:" #remove
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/src/" # remove
+    ls "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/src/" # remove
 
     # move indexer.py to github workspace
     mv /find_source.py .
@@ -96,11 +96,11 @@ then
             python3.10 indexer.py --directory ${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST} --recurse
 
             echo "Generated imports.agda contains:"
-            cat "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
+            cat "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
 
             echo "Typechecking..."
             # convert to sexp, use absolute path
-            /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
+            /root/.local/bin/agda --sexp --sexp-dir="/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" -l $(basename $file .agda-lib) --include-path="${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/${SOURCE_DEST}/imports.agda"
 
             
             break
@@ -109,18 +109,18 @@ then
         echo "Converting $(basename $2) to s-expressions."
 
         # convert to sexp, use absolute path
-        /root/.local/bin/agda --sexp --sexp-dir="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2"
+        /root/.local/bin/agda --sexp --sexp-dir="/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp" --include-path="/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib" $5 "${pwd}/${PATH_WHERE_LIB_ASSISTANT}/mylib/$2"
     fi
 
     echo "Finished typechecking."
     echo "In the test_data/agda are:"
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/test_data/agda"
+    ls "/agda-proof-assistent-assistent/test_data/agda"
 
     echo "In the lib assistant directory are:"
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}"
+    ls "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}"
 
     echo "In the sexp directory are:"
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp"
+    ls "/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/sexp"
 
     # convert sexp to graph_data.json
     python3.10 main.py

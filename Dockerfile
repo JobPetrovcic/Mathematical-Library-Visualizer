@@ -157,6 +157,9 @@ RUN pip install -r requirements.txt
 #RUN mkdir agda-proof-assistent-assistent
 #ADD agda-proof-assistent-assistent agda-proof-assistent-assistent
 
+# get agda-proof-assistent-assistent
+RUN git clone https://github.com/JobPetrovcic/agda-proof-assistent-assistent
+
 # copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh

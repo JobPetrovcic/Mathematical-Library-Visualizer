@@ -10,12 +10,6 @@ jobs:
           repository: UniMath/agda-unimath
           ref: master
           path: mylib
-      - uses: actions/checkout@v4
-        with:
-          repository: JobPetrovcic/agda-proof-assistent-assistent
-          token: ${{ secrets.ACCESSPROOFASSISTANT }}
-          ref: master
-          path: agda-proof-assistent-assistent
       - uses: JobPetrovcic/Mathematical-Library-Vizualizer@main
         with:
           language: agda
