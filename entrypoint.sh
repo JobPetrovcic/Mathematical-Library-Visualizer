@@ -52,25 +52,16 @@ then
     mv ${GITHUB_WORKSPACE}/mylib/.git ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
     git config --global --add safe.directory /github/workspace/agda-proof-assistent-assistent/test_data/agda/test_lib/mylib
     
-    ls ${GITHUB_WORKSPACE}/mylib -la
 
     # run potential additional commands
     cd ${PATH_WHERE_LIB_ASSISTANT}/mylib
-    ls -la
     echo "Executing additional commands: $6"
     eval $6
 
     # go back
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
 
-    echo "Where we moved the library:" #remove
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
-    echo "The library:" #remove
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
-    echo "The library:" #remove
-    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/src/" # remove
-
-    # move indexer.py to github workspace
+    # move indexer.py to agda-proof-assistent-assistent
     mv /find_source.py .
 
     # install library

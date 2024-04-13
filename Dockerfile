@@ -37,117 +37,117 @@ RUN pip install -r requirements.txt
 ##########
 ##########ENV PATH /home/${guest}/.local/bin:/opt/cabal/${CABAL_INSTALL}/bin:/opt/ghc/${GHC}/bin:/usr/local/bin:/usr/bin:/bin
 
-#ENV LC_ALL=C.UTF-8
-#
-## install curl
-#ENV LC_ALL=C.UTF-8
-#RUN apt-get install -y curl
-#
-#ENV ghc_version=9.0.2
-#
-## install stack
-#RUN curl -sSL https://get.haskellstack.org/ | sh
-##RUN stack config set system-ghc --global true
-##RUN stack config set install-ghc --global false
-#RUN stack --resolver ghc-${ghc_version} setup
-#
-## clone hacked agda, VERSION: 2.6.3
-#RUN mkdir -p ~/.agda
-#RUN cd ~/.agda
-##RUN git clone --depth 1 https://github.com/AndrejBauer/agda.git src
-#RUN git clone --depth 1 -b master https://github.com/JobPetrovcic/agda src
-#
-## set ghc and install hacked agda
-#
-#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
-#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
-#
-## we dont need this
-##RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install alex
-##RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install happy
-#
-## add agda to path
-#ENV PATH="~/.local/bin:$PATH"
-#
-## INSTALL LEAN
-## first install build-deps from https://github.com/docker-library/buildpack-deps
-#
-#ARG DEBIAN_FRONTEND=noninteractive
-#ENV TZ=Etc/UTC
-#RUN set -eux; \
-#	apt-get update; \
-#	apt-get install -y --no-install-recommends \
-#		ca-certificates \
-#		curl \
-#		gnupg \
-#		netbase \
-#		wget \
-#		tzdata \
-#	; \
-#	rm -rf /var/lib/apt/lists/*
-#
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-#		git \
-#		mercurial \
-#		openssh-client \
-#		subversion \
-#		\
-#		procps \
-#	&& rm -rf /var/lib/apt/lists/*
-#
-#RUN set -ex; \
-#	apt-get update; \
-#	apt-get install -y --no-install-recommends \
-#		autoconf \
-#		automake \
-#		bzip2 \
-#		dpkg-dev \
-#		file \
-#		g++ \
-#		gcc \
-#		imagemagick \
-#		libbz2-dev \
-#		libc6-dev \
-#		libcurl4-openssl-dev \
-#		libdb-dev \
-#		libevent-dev \
-#		libffi-dev \
-#		libgdbm-dev \
-#		libglib2.0-dev \
-#		libgmp-dev \
-#		libjpeg-dev \
-#		libkrb5-dev \
-#		liblzma-dev \
-#		libmagickcore-dev \
-#		libmagickwand-dev \
-#		libmaxminddb-dev \
-#		libncurses5-dev \
-#		libncursesw5-dev \
-#		libpng-dev \
-#		libpq-dev \
-#		libreadline-dev \
-#		libsqlite3-dev \
-#		libssl-dev \
-#		libtool \
-#		libwebp-dev \
-#		libxml2-dev \
-#		libxslt-dev \
-#		libyaml-dev \
-#		make \
-#		patch \
-#		unzip \
-#		xz-utils \
-#		zlib1g-dev 
-#ENV ELAN_HOME=/usr/local/elan \
-#    PATH=/usr/local/elan/bin:$PATH \
-#    LEAN_VERSION=leanprover/lean4:nightly
-#
-#RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --no-modify-path --default-toolchain $LEAN_VERSION; \
-#    chmod -R a+w $ELAN_HOME; \
-#    elan --version; \
-#    lean --version; \
-#    leanc --version; \
-#    lake --version;
+ENV LC_ALL=C.UTF-8
+
+# install curl
+ENV LC_ALL=C.UTF-8
+RUN apt-get install -y curl
+
+ENV ghc_version=9.0.2
+
+# install stack
+RUN curl -sSL https://get.haskellstack.org/ | sh
+#RUN stack config set system-ghc --global true
+#RUN stack config set install-ghc --global false
+RUN stack --resolver ghc-${ghc_version} setup
+
+# clone hacked agda, VERSION: 2.6.3
+RUN mkdir -p ~/.agda
+RUN cd ~/.agda
+#RUN git clone --depth 1 https://github.com/AndrejBauer/agda.git src
+RUN git clone --depth 1 -b master https://github.com/JobPetrovcic/agda src
+
+# set ghc and install hacked agda
+
+RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install
+RUN stack --stack-yaml src/stack-"${ghc_version}".yaml clean
+
+# we dont need this
+#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install alex
+#RUN stack --stack-yaml src/stack-"${ghc_version}".yaml install happy
+
+# add agda to path
+ENV PATH="~/.local/bin:$PATH"
+
+# INSTALL LEAN
+# first install build-deps from https://github.com/docker-library/buildpack-deps
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		ca-certificates \
+		curl \
+		gnupg \
+		netbase \
+		wget \
+		tzdata \
+	; \
+	rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		git \
+		mercurial \
+		openssh-client \
+		subversion \
+		\
+		procps \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN set -ex; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		autoconf \
+		automake \
+		bzip2 \
+		dpkg-dev \
+		file \
+		g++ \
+		gcc \
+		imagemagick \
+		libbz2-dev \
+		libc6-dev \
+		libcurl4-openssl-dev \
+		libdb-dev \
+		libevent-dev \
+		libffi-dev \
+		libgdbm-dev \
+		libglib2.0-dev \
+		libgmp-dev \
+		libjpeg-dev \
+		libkrb5-dev \
+		liblzma-dev \
+		libmagickcore-dev \
+		libmagickwand-dev \
+		libmaxminddb-dev \
+		libncurses5-dev \
+		libncursesw5-dev \
+		libpng-dev \
+		libpq-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		libssl-dev \
+		libtool \
+		libwebp-dev \
+		libxml2-dev \
+		libxslt-dev \
+		libyaml-dev \
+		make \
+		patch \
+		unzip \
+		xz-utils \
+		zlib1g-dev 
+ENV ELAN_HOME=/usr/local/elan \
+    PATH=/usr/local/elan/bin:$PATH \
+    LEAN_VERSION=leanprover/lean4:nightly
+
+RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --no-modify-path --default-toolchain $LEAN_VERSION; \
+    chmod -R a+w $ELAN_HOME; \
+    elan --version; \
+    lean --version; \
+    leanc --version; \
+    lake --version;
 
 # rm when testing on github
 #RUN mkdir mockgitworkspace
