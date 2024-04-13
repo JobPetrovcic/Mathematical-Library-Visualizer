@@ -12,7 +12,7 @@ inputs:
   file_type:
     description: 'Choose whether to compile a single file or library. Note: In both cases the file, or the .agda-stdlib file should be in the lowest level of your github repo.'
     options:
-      # [repositoty-relative/path/to/name of the file].[language] # provide a name of the file you want visualized.
+      # [repository-relative/path/to/name of the file].[language] # provide a name of the file you want visualized.
       - everything.agda # For libraries, list of all of our modules (PREFFERED).
       - autogenerate # Generate an everything.agda or everything.lean of your library (NOT RECOMMENDED).
     initial: autogenerate
