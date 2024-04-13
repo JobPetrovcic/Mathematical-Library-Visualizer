@@ -52,6 +52,10 @@ then
 
     echo "Where we moved the library:" #remove
     ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/" # remove
+    echo "The library:" #remove
+    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/" # remove
+    echo "The library:" #remove
+    ls "${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}/mylib/src/" # remove
 
     # move indexer.py to github workspace
     mv /find_source.py .
