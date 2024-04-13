@@ -43,7 +43,7 @@ then
     # clear the test_data/agda/test_lib 
     # TODO do this for lean also
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
-    rm -f .git
+    rm -rf .git
     cd ${PATH_WHERE_LIB_ASSISTANT}
     rm * -r
 
@@ -51,7 +51,8 @@ then
     cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
     mkdir ${PATH_WHERE_LIB_ASSISTANT}/mylib
     mv ${GITHUB_WORKSPACE}/mylib/* ${PATH_WHERE_LIB_ASSISTANT}/mylib # TODO something is not right here
-
+    ls ${PATH_WHERE_LIB_ASSISTANT}/mylib
+    
     # run potential additional commands
     cd ${PATH_WHERE_LIB_ASSISTANT}/mylib
     ls -la
