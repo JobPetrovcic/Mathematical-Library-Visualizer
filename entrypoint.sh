@@ -42,7 +42,9 @@ then
 
     # clear the test_data/agda/test_lib 
     # TODO do this for lean also
-    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent/${PATH_WHERE_LIB_ASSISTANT}
+    cd ${GITHUB_WORKSPACE}/agda-proof-assistent-assistent
+    rm -rf .git
+    cd ${PATH_WHERE_LIB_ASSISTANT}
     rm * -r
 
     # move the files that we want to compile so agda-proof-assistant can access it
