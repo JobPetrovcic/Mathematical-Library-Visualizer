@@ -3,6 +3,13 @@ FROM ubuntu:22.04
 CMD bash
 
 ADD requirements.txt ./	
+ENV LC_ALL=C.UTF-8
+ENV ghc_version=9.0.2
+
+# copy entrypoint
+ADD entrypoint.sh /entrypoint.sh
+ADD find_source.py /
+ADD library_installs_sh /library_installs_sh
 
 RUN apt-get update -q \
     && apt-get install -y -q --no-install-recommends procps less emacs-lucid sudo m4 opam \
@@ -12,18 +19,8 @@ RUN apt-get update -q \
 	&& apt-get install -y -q git \
 	&& apt-get update && apt-get install -y python3.10 \
 	&& apt-get install -y -q python3-pip \
-	&& pip install -r requirements.txt 
-
-ENV LC_ALL=C.UTF-8
-ENV ghc_version=9.0.2
-
-# copy entrypoint
-ADD entrypoint.sh /entrypoint.sh
-ADD find_source.py /
-ADD library_installs_sh /library_installs_sh
-
-# INSTALL AGDA
-RUN apt-get install -y curl \
+	&& pip install -r requirements.txt \
+ 	&& apt-get install -y curl \
 	&& curl -sSL https://get.haskellstack.org/ | sh \
 	&& stack --resolver ghc-${ghc_version} setup \
 	&& mkdir -p ~/.agda \
