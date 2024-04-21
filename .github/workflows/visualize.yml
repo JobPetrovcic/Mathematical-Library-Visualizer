@@ -16,19 +16,19 @@ jobs:
           token: ${{ secrets.ACCESSPROOFASSISTANT }}
           ref: master
           path: agda-proof-assistent-assistent
-      #- uses: JobPetrovcic/Mathematical-Library-Vizualizer@main
-      #  with:
-      #    language: agda
-      #    file_type: src/everything.lagda.md
-      #    mode : standalone
-      #    install_libs : no
-      #    additional_commands: 'make src/everything.lagda.md'
-      #- uses: cpina/github-action-push-to-another-repository@main
-      #  env:
-      #    API_TOKEN_GITHUB: ${{ secrets.ACCESSPROOFASSISTANT }}
-      #  with:
-      #    source-directory: 'output'
-      #    destination-github-username: 'JobPetrovcic'
-      #    destination-repository-name: 'JobPetrovcic.github.io'
-      #    user-email: job1.petrovcic@gmail.com
-      #    target-branch: main
+      - uses: JobPetrovcic/Mathematical-Library-Vizualizer@main
+        with:
+          language: agda
+          file_type: src/everything.lagda.md
+          mode : standalone
+          install_libs : no
+          additional_commands: 'make src/everything.lagda.md'
+      - uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACCESSPROOFASSISTANT }}
+        with:
+          source-directory: 'output'
+          destination-github-username: 'JobPetrovcic'
+          destination-repository-name: 'JobPetrovcic.github.io'
+          user-email: job1.petrovcic@gmail.com
+          target-branch: main
