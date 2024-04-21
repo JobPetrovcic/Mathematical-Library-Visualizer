@@ -2,18 +2,18 @@ FROM ubuntu:22.04
 
 CMD bash
 
-#ADD requirements.txt ./
 RUN apt-get update -q \
         && apt-get install -y -q --no-install-recommends procps less emacs-lucid sudo m4 opam \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y -q ghc ghc-prof ghc-doc \
-		apt-get install -y -q git \
-		apt-get update && apt-get install -y python3.10 \
-		apt-get install -y -q python3-pip \
-		pip install -r requirements.txt 
-
+RUN apt-get update && apt-get install -y -q ghc ghc-prof ghc-doc
+#RUN apt-get install -y -q git \
+#	&& apt-get update && apt-get install -y python3.10 \
+#	&& apt-get install -y -q python3-pip \
+#	&& pip install -r requirements.txt 
+#
+#ADD requirements.txt ./
 
 #ENV LC_ALL=C.UTF-8
 #ENV ghc_version=9.0.2
