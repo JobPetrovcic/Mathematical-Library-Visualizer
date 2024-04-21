@@ -5,11 +5,11 @@ jobs:
     name: Visualize library
     runs-on: ubuntu-latest
     steps:
-      #- uses: actions/checkout@v4
-      #  with:
-      #    repository: JobPetrovcic/agda-unimath
-      #    ref: master
-      #    path: mylib
+      - uses: actions/checkout@v4
+        with:
+          repository: JobPetrovcic/agda-unimath
+          ref: master
+          path: mylib
       - uses: actions/checkout@v4
         with:
           repository: JobPetrovcic/agda-proof-assistent-assistent
