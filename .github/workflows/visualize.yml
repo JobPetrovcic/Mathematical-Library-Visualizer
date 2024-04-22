@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: JobPetrovcic/agda-unimath
+          repository: Unimath/agda-unimath
           ref: master
           path: mylib
       - uses: actions/checkout@v4
