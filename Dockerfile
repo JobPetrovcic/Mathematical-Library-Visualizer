@@ -25,7 +25,7 @@ RUN apt-get update -q \
 	&& stack --resolver ghc-${ghc_version} setup \
 	&& mkdir -p ~/.agda \
 	&& cd ~/.agda \
-	&& git clone --depth 1 -b release-2.6.4.3-base https://github.com/JobPetrovcic/agda src \
+	&& git clone --depth 1 -b sexp-updated https://github.com/JobPetrovcic/agda src \
 	&& stack --stack-yaml src/stack-"${ghc_version}".yaml install \
 	&& stack --stack-yaml src/stack-"${ghc_version}".yaml clean \
 	&& sudo chmod +x /entrypoint.sh
