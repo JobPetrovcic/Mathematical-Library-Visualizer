@@ -4,7 +4,7 @@ CMD bash
 
 ADD requirements.txt ./	
 ENV LC_ALL=C.UTF-8
-ENV ghc_version=9.0.2
+ENV ghc_version=9.8.4
 
 # copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
